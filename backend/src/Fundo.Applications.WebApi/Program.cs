@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using Fundo.Applications.WebApi.Data;
+using Fundo.Applications.WebApi.Infraestructure;
 
 namespace Fundo.Applications.WebApi
 {

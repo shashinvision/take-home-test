@@ -4,8 +4,9 @@ using Fundo.Applications.WebApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Fundo.Applications.WebApi.Data;
 
-namespace Fundo.Applications.WebApi.Data
+namespace Fundo.Applications.WebApi.Infraestructure
 {
     public static class SeedData
     {
@@ -19,21 +20,68 @@ namespace Fundo.Applications.WebApi.Data
                 using var context = new LoanDbContext(
                     serviceProvider.GetRequiredService<DbContextOptions<LoanDbContext>>());
 
-                if (context.Loans.Any())
+                // Verificar si ya hay datos
+                if (context.Applicants.Any())
                 {
-                    logger.LogInformation("Database already contains loan data. Skipping seed.");
+                    logger.LogInformation("Database already contains data. Skipping seed.");
                     return;
                 }
 
                 logger.LogInformation("Starting database seeding...");
 
-                // PRÉSTAMOS CON HISTORIA COHERENTE
+                // 1. PRIMERO LOS APPLICANTS (solicitantes)
+                var applicants = new[]
+                {
+                    new Applicant
+                    {
+                        FullName = "Maria Silva",
+                        Dni = "12345678-9"
+                    },
+                    new Applicant
+                    {
+                        FullName = "Juan Perez",
+                        Dni = "23456789-0"
+                    },
+                    new Applicant
+                    {
+                        FullName = "Carlos Rodriguez",
+                        Dni = "34567890-1"
+                    },
+                    new Applicant
+                    {
+                        FullName = "Ana Martinez",
+                        Dni = "45678901-2"
+                    },
+                    new Applicant
+                    {
+                        FullName = "Pedro Gonzalez",
+                        Dni = "56789012-3"
+                    },
+                    new Applicant
+                    {
+                        FullName = "Laura Torres",
+                        Dni = "67890123-4"
+                    }
+                };
+
+                context.Applicants.AddRange(applicants);
+                context.SaveChanges();
+                logger.LogInformation("Successfully seeded {ApplicantCount} applicants", applicants.Length);
+
+                // 2. AHORA LOS PRÉSTAMOS (ya con IDs reales)
+                var mariaSilva = context.Applicants.First(a => a.Dni == "12345678-9");
+                var juanPerez = context.Applicants.First(a => a.Dni == "23456789-0");
+                var carlosRodriguez = context.Applicants.First(a => a.Dni == "34567890-1");
+                var anaMartinez = context.Applicants.First(a => a.Dni == "45678901-2");
+                var pedroGonzalez = context.Applicants.First(a => a.Dni == "56789012-3");
+                var lauraTorres = context.Applicants.First(a => a.Dni == "67890123-4");
+
                 var loans = new[]
                 {
                     // 1. Maria Silva - Préstamo activo con 2 pagos realizados
                     new Loan
                     {
-                        ApplicantName = "Maria Silva",
+                        IdApplicant = mariaSilva.Id,
                         Amount = 1500.00m,
                         CurrentBalance = 500.00m,
                         IsActive = 1,
@@ -44,7 +92,7 @@ namespace Fundo.Applications.WebApi.Data
                     // 2. Juan Perez - Préstamo PAGADO completamente
                     new Loan
                     {
-                        ApplicantName = "Juan Perez",
+                        IdApplicant = juanPerez.Id,
                         Amount = 3000.00m,
                         CurrentBalance = 0.00m,
                         IsActive = 0,
@@ -55,7 +103,7 @@ namespace Fundo.Applications.WebApi.Data
                     // 3. Carlos Rodriguez - Préstamo activo reciente, 1 pago
                     new Loan
                     {
-                        ApplicantName = "Carlos Rodriguez",
+                        IdApplicant = carlosRodriguez.Id,
                         Amount = 5000.00m,
                         CurrentBalance = 3500.00m,
                         IsActive = 1,
@@ -66,7 +114,7 @@ namespace Fundo.Applications.WebApi.Data
                     // 4. Ana Martinez - Préstamo activo con 3 pagos
                     new Loan
                     {
-                        ApplicantName = "Ana Martinez",
+                        IdApplicant = anaMartinez.Id,
                         Amount = 2500.00m,
                         CurrentBalance = 1000.00m,
                         IsActive = 1,
@@ -77,7 +125,7 @@ namespace Fundo.Applications.WebApi.Data
                     // 5. Pedro Gonzalez - Préstamo PAGADO hace tiempo
                     new Loan
                     {
-                        ApplicantName = "Pedro Gonzalez",
+                        IdApplicant = pedroGonzalez.Id,
                         Amount = 4000.00m,
                         CurrentBalance = 0.00m,
                         IsActive = 0,
@@ -88,7 +136,7 @@ namespace Fundo.Applications.WebApi.Data
                     // 6. Laura Torres - Préstamo activo sin pagos aún
                     new Loan
                     {
-                        ApplicantName = "Laura Torres",
+                        IdApplicant = lauraTorres.Id,
                         Amount = 2000.00m,
                         CurrentBalance = 2000.00m,
                         IsActive = 1,
@@ -99,28 +147,27 @@ namespace Fundo.Applications.WebApi.Data
 
                 context.Loans.AddRange(loans);
                 context.SaveChanges();
-
                 logger.LogInformation("Successfully seeded {LoanCount} loans", loans.Length);
 
-                // PAGOS COHERENTES CON LOS PRÉSTAMOS
-                var mariaSilva = context.Loans.First(l => l.ApplicantName == "Maria Silva");
-                var juanPerez = context.Loans.First(l => l.ApplicantName == "Juan Perez");
-                var carlosRodriguez = context.Loans.First(l => l.ApplicantName == "Carlos Rodriguez");
-                var anaMartinez = context.Loans.First(l => l.ApplicantName == "Ana Martinez");
-                var pedroGonzalez = context.Loans.First(l => l.ApplicantName == "Pedro Gonzalez");
+                // 3. FINALMENTE LOS PAGOS (con los IDs reales de los loans)
+                var loanMaria = context.Loans.First(l => l.IdApplicant == mariaSilva.Id);
+                var loanJuan = context.Loans.First(l => l.IdApplicant == juanPerez.Id);
+                var loanCarlos = context.Loans.First(l => l.IdApplicant == carlosRodriguez.Id);
+                var loanAna = context.Loans.First(l => l.IdApplicant == anaMartinez.Id);
+                var loanPedro = context.Loans.First(l => l.IdApplicant == pedroGonzalez.Id);
 
                 var payments = new[]
                 {
-                    // Maria Silva - 2 pagos de $500 (total $1000 pagado)
+                    // Maria Silva - 2 pagos de $500 (total $1000 pagado, queda $500)
                     new Payment
                     {
-                        IdLoan = mariaSilva.Id,
+                        IdLoan = loanMaria.Id,
                         Amount = 500.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-2).AddDays(-10)
                     },
                     new Payment
                     {
-                        IdLoan = mariaSilva.Id,
+                        IdLoan = loanMaria.Id,
                         Amount = 500.00m,
                         CreatedAt = DateTime.UtcNow.AddDays(-15)
                     },
@@ -128,47 +175,47 @@ namespace Fundo.Applications.WebApi.Data
                     // Juan Perez - 3 pagos que completaron los $3000
                     new Payment
                     {
-                        IdLoan = juanPerez.Id,
+                        IdLoan = loanJuan.Id,
                         Amount = 1000.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-6)
                     },
                     new Payment
                     {
-                        IdLoan = juanPerez.Id,
+                        IdLoan = loanJuan.Id,
                         Amount = 1000.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-4)
                     },
                     new Payment
                     {
-                        IdLoan = juanPerez.Id,
+                        IdLoan = loanJuan.Id,
                         Amount = 1000.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-2)
                     },
 
-                    // Carlos Rodriguez - 1 pago de $1500
+                    // Carlos Rodriguez - 1 pago de $1500 (queda $3500)
                     new Payment
                     {
-                        IdLoan = carlosRodriguez.Id,
+                        IdLoan = loanCarlos.Id,
                         Amount = 1500.00m,
                         CreatedAt = DateTime.UtcNow.AddDays(-5)
                     },
 
-                    // Ana Martinez - 3 pagos de $500 (total $1500)
+                    // Ana Martinez - 3 pagos de $500 (total $1500, queda $1000)
                     new Payment
                     {
-                        IdLoan = anaMartinez.Id,
+                        IdLoan = loanAna.Id,
                         Amount = 500.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-4)
                     },
                     new Payment
                     {
-                        IdLoan = anaMartinez.Id,
+                        IdLoan = loanAna.Id,
                         Amount = 500.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-2)
                     },
                     new Payment
                     {
-                        IdLoan = anaMartinez.Id,
+                        IdLoan = loanAna.Id,
                         Amount = 500.00m,
                         CreatedAt = DateTime.UtcNow.AddDays(-10)
                     },
@@ -176,35 +223,39 @@ namespace Fundo.Applications.WebApi.Data
                     // Pedro Gonzalez - 4 pagos que completaron los $4000
                     new Payment
                     {
-                        IdLoan = pedroGonzalez.Id,
+                        IdLoan = loanPedro.Id,
                         Amount = 1000.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-9)
                     },
                     new Payment
                     {
-                        IdLoan = pedroGonzalez.Id,
+                        IdLoan = loanPedro.Id,
                         Amount = 1000.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-7)
                     },
                     new Payment
                     {
-                        IdLoan = pedroGonzalez.Id,
+                        IdLoan = loanPedro.Id,
                         Amount = 1000.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-5)
                     },
                     new Payment
                     {
-                        IdLoan = pedroGonzalez.Id,
+                        IdLoan = loanPedro.Id,
                         Amount = 1000.00m,
                         CreatedAt = DateTime.UtcNow.AddMonths(-4)
                     }
+
+                    // Laura Torres no tiene pagos todavía
                 };
 
                 context.Payments.AddRange(payments);
                 context.SaveChanges();
-
                 logger.LogInformation("Successfully seeded {PaymentCount} payments", payments.Length);
+
                 logger.LogInformation("Database seeding completed successfully");
+                logger.LogInformation("Summary: {ApplicantCount} applicants, {LoanCount} loans, {PaymentCount} payments",
+                    applicants.Length, loans.Length, payments.Length);
             }
             catch (Exception ex)
             {
