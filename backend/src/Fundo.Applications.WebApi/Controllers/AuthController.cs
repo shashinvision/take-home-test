@@ -5,7 +5,7 @@ using Fundo.Applications.WebApi.Models;
 using Fundo.Applications.WebApi.DTOs;
 using System;
 using System.Text.Json;
-using System.Runtime.ExceptionServices;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Fundo.Applications.WebApi.Controllers
@@ -41,6 +41,7 @@ namespace Fundo.Applications.WebApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {

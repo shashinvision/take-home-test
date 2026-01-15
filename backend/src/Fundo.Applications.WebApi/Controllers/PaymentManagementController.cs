@@ -5,11 +5,12 @@ using Fundo.Applications.WebApi.Models;
 using Fundo.Applications.WebApi.DTOs;
 using System;
 using System.Text.Json;
-using System.Runtime.ExceptionServices;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace Fundo.Applications.WebApi.Controllers
 {
+    [Authorize]
     [Route("/payment")]
     public class PaymentManagementController : Controller
     {
