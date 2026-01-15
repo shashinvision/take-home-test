@@ -2,6 +2,8 @@ import { Injectable, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, tap } from "rxjs";
 import { Router } from "@angular/router";
+import { environment } from "../../environments/environment";
+import { Environment } from "../_models/environment.model";
 
 export interface LoginResponse {
   token: string;
@@ -18,17 +20,17 @@ export interface LoginResponse {
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private readonly API_URL = "http://localhost:3000/api"; // Cambiá esto por tu API
+  private apiUrl: string = (environment as Environment).API_URL;
 
   login(email: string, password: string): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(`${this.API_URL}/auth/login`, {
+      .post<LoginResponse>(`${this.apiUrl}/auth/login`, {
         email,
         password,
       })
       .pipe(
         tap((response) => {
-          // Guardamos el token en localStorage
+          // keep token in localStorage
           localStorage.setItem("token", response.token);
           localStorage.setItem("user", JSON.stringify(response.user));
         }),
