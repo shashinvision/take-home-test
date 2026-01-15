@@ -22,11 +22,12 @@ export class AuthService {
   private router = inject(Router);
   private apiUrl: string = (environment as Environment).API_URL;
 
-  login(email: string, password: string): Observable<LoginResponse> {
+  login(Email: string, Password: string): Observable<LoginResponse> {
+    const url = `${this.apiUrl}/api/auth/login`;
     return this.http
-      .post<LoginResponse>(`${this.apiUrl}/auth/login`, {
-        email,
-        password,
+      .post<LoginResponse>(`${url}`, {
+        Email: Email,
+        Password: Password,
       })
       .pipe(
         tap((response) => {
