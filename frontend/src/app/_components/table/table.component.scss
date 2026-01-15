@@ -1,119 +1,118 @@
-// table.component.scss
 .loans {
-  width: 100%;
-}
+  padding: 2rem;
 
-.loans--container {
-  h1 {
-    margin: 0 0 1.5rem 0;
-    font-size: 1.5rem;
-    color: #2c3e50;
-    font-weight: 600;
-  }
+  &--container {
+    max-width: 1200px;
+    margin: 0 auto;
 
-  // Estilos para la tabla de Angular Material
-  table {
-    width: 100%;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-
-    // Header
-    th {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: #ffffff;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 1rem 1.5rem !important;
-      border-bottom: none !important;
-    }
-
-    // Celdas
-    td {
-      padding: 1rem 1.5rem !important;
-      font-size: 0.95rem;
-      color: #2c3e50;
-      border-bottom: 1px solid #ecf0f1 !important;
-    }
-
-    // Filas
-    tr {
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        background-color: #f8f9fa;
-      }
-
-      &:last-child td {
-        border-bottom: none !important;
-      }
-    }
-
-    // Status badge
-    td:nth-child(4) {
-      font-weight: 500;
-
-      // Puedes agregar badges condicionales si querés
-      &::first-letter {
-        text-transform: uppercase;
-      }
-    }
-  }
-
-  // Si usás mat-elevation-z8, esto mejora la sombra
-  .mat-elevation-z8 {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
-  }
-}
-
-// Estado activo/inactivo con colores
-.loans--container table td {
-  &:has-text("Active") {
-    color: #27ae60;
-    font-weight: 600;
-  }
-
-  &:has-text("Inactive") {
-    color: #e74c3c;
-    font-weight: 600;
-  }
-}
-
-// Responsive
-@media (max-width: 768px) {
-  .loans--container {
     h1 {
-      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: rgba(0, 0, 0, 0.87);
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    > button {
+      margin-bottom: 1.5rem;
+      height: 40px;
+      padding: 0 24px;
+      font-weight: 500;
     }
 
     table {
-      th,
+      width: 100%;
+      background: white;
+
+      th {
+        background: #37474f;
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 16px;
+      }
+
       td {
-        padding: 0.75rem 1rem !important;
-        font-size: 0.85rem;
+        padding: 16px;
+        color: rgba(0, 0, 0, 0.87);
+        font-size: 14px;
+
+        &.no-data {
+          text-align: center;
+          padding: 3rem;
+          color: rgba(0, 0, 0, 0.6);
+          font-style: italic;
+        }
+      }
+
+      tr.mat-row:hover {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      // Status badge
+      .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+
+        &.active {
+          background-color: #e8f5e9;
+          color: #2e7d32;
+        }
+
+        &.inactive {
+          background-color: #ffebee;
+          color: #c62828;
+        }
+      }
+
+      // Paid off
+      .paid-off {
+        color: #4caf50;
+        font-weight: 600;
+      }
+
+      // Action buttons
+      button[mat-icon-button] {
+        transition: transform 0.2s ease;
+
+        &:not(:disabled):hover {
+          transform: scale(1.1);
+        }
+
+        &:disabled {
+          opacity: 0.3;
+          cursor: not-allowed;
+        }
       }
     }
   }
 }
 
-// Override de estilos de Material si es necesario
-::ng-deep {
-  .mat-mdc-table {
-    background: transparent;
-  }
+@media (max-width: 768px) {
+  .loans {
+    padding: 1rem;
 
-  .mat-mdc-header-row {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  }
+    &--container {
+      h1 {
+        font-size: 1.5rem;
+      }
 
-  .mat-mdc-header-cell {
-    color: white !important;
-    font-weight: 600 !important;
-  }
+      > button {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
 
-  .mat-mdc-row:hover {
-    background-color: #f8f9fa;
+      table {
+        font-size: 12px;
+
+        th,
+        td {
+          padding: 12px 8px;
+        }
+      }
+    }
   }
 }

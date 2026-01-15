@@ -12,7 +12,7 @@ export class PaymentService {
 
   constructor(private http: HttpClient) {}
 
-  createLoan(payload: paymentPayload) {
+  createPayment(payload: paymentPayload) {
     return this.http.post(`${this.apiUrl}/payment`, payload);
   }
 }
