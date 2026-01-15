@@ -20,7 +20,7 @@ namespace Fundo.Applications.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             // DbContext
-            services.AddDbContext<LoanDbContext>(options =>
+            services.AddDbContext<FundoDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
             // Controllers

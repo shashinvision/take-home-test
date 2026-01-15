@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Fundo.Applications.WebApi.Infraestructure.Repositories;
 
-public class LoanRepository : IloanRepository
+public class LoanRepository : IBaseRepository<Loan>
 {
-    private readonly LoanDbContext _context;
+    private readonly FundoDbContext _context;
 
-    public LoanRepository(LoanDbContext context)
+    public LoanRepository(FundoDbContext context)
     {
         _context = context;
     }

@@ -6,13 +6,13 @@ using Fundo.Applications.WebApi.Models;
 
 namespace Fundo.Applications.WebApi.Data
 {
-    public partial class LoanDbContext : DbContext
+    public partial class FundoDbContext : DbContext
     {
-        public LoanDbContext()
+        public FundoDbContext()
         {
         }
 
-        public LoanDbContext(DbContextOptions<LoanDbContext> options)
+        public FundoDbContext(DbContextOptions<FundoDbContext> options)
             : base(options)
         {
         }

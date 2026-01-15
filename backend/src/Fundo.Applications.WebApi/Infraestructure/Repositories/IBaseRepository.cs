@@ -5,11 +5,11 @@ using Fundo.Applications.WebApi.Models;
 
 namespace Fundo.Applications.WebApi.Infraestructure.Repositories;
 
-public interface IloanRepository
+public interface IBaseRepository<T> where T : class
 {
-    Task<Loan> GetById(int id);
-    Task<IEnumerable<Loan>> GetAll();
-    Task Add(Loan loan);
-    Task Update(Loan loan);
+    Task<T> GetById(int id);
+    Task<IEnumerable<T>> GetAll();
+    Task Add(T entity);
+    Task Update(T entity);
     Task Delete(int id);
 }

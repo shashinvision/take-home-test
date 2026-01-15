@@ -17,8 +17,8 @@ namespace Fundo.Applications.WebApi.Infraestructure
 
             try
             {
-                using var context = new LoanDbContext(
-                    serviceProvider.GetRequiredService<DbContextOptions<LoanDbContext>>());
+                using var context = new FundoDbContext(
+                    serviceProvider.GetRequiredService<DbContextOptions<FundoDbContext>>());
 
                 // Verificar si ya hay datos
                 if (context.Applicants.Any())
