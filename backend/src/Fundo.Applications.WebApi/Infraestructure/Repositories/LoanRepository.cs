@@ -17,7 +17,10 @@ public class LoanRepository : IBaseRepository<Loan>
 
     public async Task<Loan> GetById(int id)
     {
-        return await _context.Loans.FindAsync(id);
+        return await _context.Loans
+            .Include(l => l.IdApplicantNavigation)
+            .Include(l => l.Payments)
+            .FirstOrDefaultAsync(l => l.Id == id);
     }
 
     public async Task<IEnumerable<Loan>> GetAll()

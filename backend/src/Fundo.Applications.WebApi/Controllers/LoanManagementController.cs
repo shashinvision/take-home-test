@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Fundo.Applications.WebApi.Services;
+using Fundo.Applications.WebApi.Models;
+using Fundo.Applications.WebApi.DTOs;
+using System;
+using System.Text.Json;
+
 
 namespace Fundo.Applications.WebApi.Controllers
 {
@@ -20,5 +25,50 @@ namespace Fundo.Applications.WebApi.Controllers
             var loans = await _loanManagementService.GetAllLoans();
             return Ok(loans);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(int id)
+        {
+            var loan = await _loanManagementService.GetLoanById(id);
+            return Ok(loan);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateLoan([FromBody] LoanDto loanDto)
+        {
+            try
+            {
+                // see json loanDto
+                Console.WriteLine(
+                    JsonSerializer.Serialize(loanDto)
+                );
+
+                // Validaciones básicas
+                if (loanDto == null)
+                    return BadRequest("Loan data is required");
+
+                if (loanDto.Amount == null || loanDto.Amount <= 0)
+                    return BadRequest("Amount must be greater than 0");
+
+                if (loanDto.IdApplicant == null || loanDto.IdApplicant <= 0)
+                    return BadRequest("Valid applicant ID is required");
+
+                await _loanManagementService.CreateLoan(loanDto);
+
+                return Ok(new
+                {
+                    message = "Loan created successfully",
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }

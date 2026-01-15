@@ -8,6 +8,7 @@ using Fundo.Applications.WebApi.Models;
 using Fundo.Applications.WebApi.Data;
 using Fundo.Applications.WebApi.Infraestructure.Repositories;
 using Fundo.Applications.WebApi.Services;
+using System.Text.Json.Serialization;
 
 namespace Fundo.Applications.WebApi
 {
@@ -32,6 +33,13 @@ namespace Fundo.Applications.WebApi
                 {
                     options.JsonSerializerOptions.ReferenceHandler =
                         System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                });
+
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 });
 
             //Repositories
