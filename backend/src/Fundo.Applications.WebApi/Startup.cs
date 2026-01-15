@@ -57,6 +57,8 @@ namespace Fundo.Applications.WebApi
             // Services
             services.AddScoped<ILoanManagementService, LoanManagementService>();
             services.AddScoped<IPaymentManagementService, PaymentManagementService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ITokenService, TokenService>();
 
             var jwtSettings = Configuration.GetSection("JwtSettings");
             var secretKey = jwtSettings["SecretKey"] ?? throw new InvalidOperationException("JWT Secret not configured");
@@ -83,8 +85,7 @@ namespace Fundo.Applications.WebApi
 
             services.AddAuthorization();
 
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<ITokenService, TokenService>();
+
 
             // CORS
             services.AddCors(options =>
