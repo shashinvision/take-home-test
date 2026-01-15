@@ -256,6 +256,33 @@ namespace Fundo.Applications.WebApi.Infraestructure
                 logger.LogInformation("Database seeding completed successfully");
                 logger.LogInformation("Summary: {ApplicantCount} applicants, {LoanCount} loans, {PaymentCount} payments",
                     applicants.Length, loans.Length, payments.Length);
+
+                // 4. USUARIO ADMIN
+                if (!context.Users.Any(u => u.Email == "admin@admin.com"))
+                {
+                    var adminUser = new User
+                    {
+                        Email = "admin@admin.com",
+                        FullName = "Admin",
+                        // Password real (solo para seed / testing):
+                        // asdf1234.,
+                        PasswordHash = "$2a$11$VRCL./etYp6kF0eVdeQAiufrC2Jq67wJtbXLBhhsmEIaiSBkBS/w2",
+                        IsActive = 1,
+                        CreatedAt = DateTime.UtcNow
+                    };
+
+                    context.Users.Add(adminUser);
+                    context.SaveChanges();
+
+                    logger.LogInformation("Admin user seeded successfully (admin@admin.com)");
+                }
+                else
+                {
+                    logger.LogInformation("Admin user already exists. Skipping admin seed.");
+                }
+
+
+
             }
             catch (Exception ex)
             {
