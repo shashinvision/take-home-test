@@ -52,6 +52,7 @@ namespace Fundo.Applications.WebApi
             services.AddScoped<IBaseRepository<Payment>, PaymentRepository>();
             services.AddScoped<IBaseRepository<Applicant>, ApplicantRepository>();
             services.AddScoped<IBaseRepository<User>, UserRepository>();
+            services.AddScoped<IAuthRepository<User>, UserRepository>();
 
             // Services
             services.AddScoped<LoanManagementService>();
