@@ -1,0 +1,590 @@
+{
+	"info": {
+		"_postman_id": "10ce88f4-fcba-437f-ae94-dc942038f61a",
+		"name": "Challenge Loan",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7896082"
+	},
+	"item": [
+		{
+			"name": "loans",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/loans",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"loans"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "loans",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/loans",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"loans"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 01:07:52 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 23,\n        \"amount\": 1500,\n        \"currentBalance\": 500,\n        \"isActive\": 1,\n        \"createdAt\": \"2025-10-14T23:58:17.177\",\n        \"updateAt\": \"2025-12-30T23:58:17.177\",\n        \"idApplicant\": 7,\n        \"idApplicantNavigation\": {\n            \"id\": 7,\n            \"fullName\": \"Maria Silva\",\n            \"dni\": \"12345678-9\"\n        },\n        \"payments\": [\n            {\n                \"id\": 27,\n                \"amount\": 500,\n                \"idLoan\": 23,\n                \"createdAt\": \"2025-11-04T23:58:17.237\"\n            },\n            {\n                \"id\": 28,\n                \"amount\": 500,\n                \"idLoan\": 23,\n                \"createdAt\": \"2025-12-30T23:58:17.237\"\n            }\n        ]\n    },\n    {\n        \"id\": 24,\n        \"amount\": 3000,\n        \"currentBalance\": 0,\n        \"isActive\": 0,\n        \"createdAt\": \"2025-05-14T23:58:17.177\",\n        \"updateAt\": \"2025-11-14T23:58:17.177\",\n        \"idApplicant\": 8,\n        \"idApplicantNavigation\": {\n            \"id\": 8,\n            \"fullName\": \"Juan Perez\",\n            \"dni\": \"23456789-0\"\n        },\n        \"payments\": [\n            {\n                \"id\": 29,\n                \"amount\": 1000,\n                \"idLoan\": 24,\n                \"createdAt\": \"2025-07-14T23:58:17.237\"\n            },\n            {\n                \"id\": 30,\n                \"amount\": 1000,\n                \"idLoan\": 24,\n                \"createdAt\": \"2025-09-14T23:58:17.237\"\n            },\n            {\n                \"id\": 31,\n                \"amount\": 1000,\n                \"idLoan\": 24,\n                \"createdAt\": \"2025-11-14T23:58:17.237\"\n            }\n        ]\n    },\n    {\n        \"id\": 25,\n        \"amount\": 5000,\n        \"currentBalance\": 3500,\n        \"isActive\": 1,\n        \"createdAt\": \"2025-11-14T23:58:17.177\",\n        \"updateAt\": \"2026-01-09T23:58:17.177\",\n        \"idApplicant\": 9,\n        \"idApplicantNavigation\": {\n            \"id\": 9,\n            \"fullName\": \"Carlos Rodriguez\",\n            \"dni\": \"34567890-1\"\n        },\n        \"payments\": [\n            {\n                \"id\": 32,\n                \"amount\": 1500,\n                \"idLoan\": 25,\n                \"createdAt\": \"2026-01-09T23:58:17.237\"\n            }\n        ]\n    },\n    {\n        \"id\": 26,\n        \"amount\": 2500,\n        \"currentBalance\": 1000,\n        \"isActive\": 1,\n        \"createdAt\": \"2025-08-14T23:58:17.177\",\n        \"updateAt\": \"2026-01-04T23:58:17.177\",\n        \"idApplicant\": 10,\n        \"idApplicantNavigation\": {\n            \"id\": 10,\n            \"fullName\": \"Ana Martinez\",\n            \"dni\": \"45678901-2\"\n        },\n        \"payments\": [\n            {\n                \"id\": 33,\n                \"amount\": 500,\n                \"idLoan\": 26,\n                \"createdAt\": \"2025-09-14T23:58:17.237\"\n            },\n            {\n                \"id\": 34,\n                \"amount\": 500,\n                \"idLoan\": 26,\n                \"createdAt\": \"2025-11-14T23:58:17.237\"\n            },\n            {\n                \"id\": 35,\n                \"amount\": 500,\n                \"idLoan\": 26,\n                \"createdAt\": \"2026-01-04T23:58:17.237\"\n            }\n        ]\n    },\n    {\n        \"id\": 27,\n        \"amount\": 4000,\n        \"currentBalance\": 0,\n        \"isActive\": 0,\n        \"createdAt\": \"2025-03-14T23:58:17.177\",\n        \"updateAt\": \"2025-09-14T23:58:17.177\",\n        \"idApplicant\": 11,\n        \"idApplicantNavigation\": {\n            \"id\": 11,\n            \"fullName\": \"Pedro Gonzalez\",\n            \"dni\": \"56789012-3\"\n        },\n        \"payments\": [\n            {\n                \"id\": 36,\n                \"amount\": 1000,\n                \"idLoan\": 27,\n                \"createdAt\": \"2025-04-14T23:58:17.237\"\n            },\n            {\n                \"id\": 37,\n                \"amount\": 1000,\n                \"idLoan\": 27,\n                \"createdAt\": \"2025-06-14T23:58:17.237\"\n            },\n            {\n                \"id\": 38,\n                \"amount\": 1000,\n                \"idLoan\": 27,\n                \"createdAt\": \"2025-08-14T23:58:17.237\"\n            },\n            {\n                \"id\": 39,\n                \"amount\": 1000,\n                \"idLoan\": 27,\n                \"createdAt\": \"2025-09-14T23:58:17.237\"\n            }\n        ]\n    },\n    {\n        \"id\": 28,\n        \"amount\": 2000,\n        \"currentBalance\": 2000,\n        \"isActive\": 1,\n        \"createdAt\": \"2025-12-30T23:58:17.177\",\n        \"updateAt\": null,\n        \"idApplicant\": 12,\n        \"idApplicantNavigation\": {\n            \"id\": 12,\n            \"fullName\": \"Laura Torres\",\n            \"dni\": \"67890123-4\"\n        },\n        \"payments\": []\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "applicants",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/applicants",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"applicants"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "applicants",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/applicants",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"applicants"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 20:12:21 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"count\": 6,\n    \"data\": [\n        {\n            \"id\": 7,\n            \"fullName\": \"Maria Silva\",\n            \"dni\": \"12345678-9\"\n        },\n        {\n            \"id\": 8,\n            \"fullName\": \"Juan Perez\",\n            \"dni\": \"23456789-0\"\n        },\n        {\n            \"id\": 9,\n            \"fullName\": \"Carlos Rodriguez\",\n            \"dni\": \"34567890-1\"\n        },\n        {\n            \"id\": 10,\n            \"fullName\": \"Ana Martinez\",\n            \"dni\": \"45678901-2\"\n        },\n        {\n            \"id\": 11,\n            \"fullName\": \"Pedro Gonzalez\",\n            \"dni\": \"56789012-3\"\n        },\n        {\n            \"id\": 12,\n            \"fullName\": \"Laura Torres\",\n            \"dni\": \"67890123-4\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "loans by ID",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/loans/32",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"loans",
+						"32"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "loans by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:5001/loans/27",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"loans",
+								"27"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 01:13:39 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 27,\n    \"amount\": 4000,\n    \"currentBalance\": 0,\n    \"isActive\": 0,\n    \"createdAt\": \"2025-03-14T23:58:17.177\",\n    \"updateAt\": \"2025-09-14T23:58:17.177\",\n    \"idApplicant\": 11,\n    \"idApplicantNavigation\": {\n        \"id\": 11,\n        \"fullName\": \"Pedro Gonzalez\",\n        \"dni\": \"56789012-3\"\n    },\n    \"payments\": [\n        {\n            \"id\": 36,\n            \"amount\": 1000,\n            \"idLoan\": 27,\n            \"createdAt\": \"2025-04-14T23:58:17.237\"\n        },\n        {\n            \"id\": 37,\n            \"amount\": 1000,\n            \"idLoan\": 27,\n            \"createdAt\": \"2025-06-14T23:58:17.237\"\n        },\n        {\n            \"id\": 38,\n            \"amount\": 1000,\n            \"idLoan\": 27,\n            \"createdAt\": \"2025-08-14T23:58:17.237\"\n        },\n        {\n            \"id\": 39,\n            \"amount\": 1000,\n            \"idLoan\": 27,\n            \"createdAt\": \"2025-09-14T23:58:17.237\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Load loans",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 5000.00,\n    \"currentBalance\": 5000, \n    \"isActive\": 1,\n    \"idApplicant\": 7\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/loans",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"loans"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Load loans",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 5000.00,\n    \"currentBalance\": 5000, \n    \"isActive\": 1,\n    \"idApplicant\": 7\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/loans",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"loans"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 01:40:39 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Loan created successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "User register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Email\": \"felipei.mancilla@gmail.com\",\n    \"Name\": \"Felipe Mancilla\", \n    \"Password\": \"asdf1234.,\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/auth/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User register",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Email\": \"felipei.mancilla@gmail.com\",\n    \"Name\": \"Felipe Mancilla\", \n    \"Password\": \"asdf1234.,\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/auth/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 16:11:41 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJmZWxpcGVpLm1hbmNpbGxhQGdtYWlsLmNvbSIsIm5hbWUiOiJGZWxpcGUgTWFuY2lsbGEiLCJqdGkiOiJhMjFhOTEzZS03YzM5LTRlNDYtOWU5NS01NDg2NjYxNmRkZTkiLCJleHAiOjE3Njg1Nzk5MDIsImlzcyI6IkxvYW5NYW5hZ2VtZW50QVBJIiwiYXVkIjoiTG9hbk1hbmFnZW1lbnRDbGllbnQifQ.9Nt53kbx5krtJkvy8PIxqonDxfPGcdELFw-qIYSgPjo\",\n    \"user\": {\n        \"id\": \"1\",\n        \"email\": \"felipei.mancilla@gmail.com\",\n        \"name\": \"Felipe Mancilla\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "User login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Email\": \"admin@admin.com\",\n    \"Password\": \"asdf1234.,\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "User login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Email\": \"felipei.mancilla@gmail.com\",\n    \"Password\": \"asdf1234.,\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/api/auth/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 16:16:14 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJmZWxpcGVpLm1hbmNpbGxhQGdtYWlsLmNvbSIsIm5hbWUiOiJGZWxpcGUgTWFuY2lsbGEiLCJqdGkiOiJjYWQ1N2ZlMC01ZjU4LTQxODMtYjNiNy0xOGYxYjI1YTU1MzgiLCJleHAiOjE3Njg1ODAxNzUsImlzcyI6IkxvYW5NYW5hZ2VtZW50QVBJIiwiYXVkIjoiTG9hbk1hbmFnZW1lbnRDbGllbnQifQ.rKxYUNhpnGz0hQHsOsADR_VFWY6lJ42zxKaZ8PYq330\",\n    \"user\": {\n        \"id\": \"1\",\n        \"email\": \"felipei.mancilla@gmail.com\",\n        \"name\": \"Felipe Mancilla\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Load payment",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1000.00,\n    \"idLoan\": 32\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/payment",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"payment"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Load payment",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000.00,\n    \"idLoan\": 30\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/payment",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 01:56:49 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Payment created successfully\"\n}"
+				},
+				{
+					"name": "400",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 1000000.00,\n    \"idLoan\": 30\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:5001/payment",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "5001",
+							"path": [
+								"payment"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Jan 2026 12:00:58 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "Loan already paid"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:latest
+    platform: linux/amd64
+    container_name: sqlserver
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "123qwe.."
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  sql-init:
+    image: mcr.microsoft.com/mssql-tools
+    platform: linux/amd64
+    container_name: sql_server_init
+    depends_on:
+      - sqlserver
+    volumes:
+      - ./backend/db/init.sql:/init.sql:ro
+    command: >
+      bash -c "
+      echo 'Waiting for SQL Server...' &&
+      sleep 20 &&
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P 123qwe.. -i /init.sql"
+
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    container_name: fundo-backend
+    restart: unless-stopped
+    depends_on:
+      - sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:80
+      ConnectionStrings__SqlConnection: Server=sqlserver;Database=loandb;User Id=sa;Password=123qwe..;Encrypt=False;
+    ports:
+      - "8080:80"
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    container_name: fundo-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+
+volumes:
+  sqlserver_data:

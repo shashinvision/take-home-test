@@ -1,0 +1,62 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <h2>Create Loan</h2>
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Loan Amount</mat-label>
+        <input matInput type="number" formControlName="amount" required />
+        <mat-error *ngIf="form.get('amount')?.hasError('required')">
+          Required field
+        </mat-error>
+        <mat-error *ngIf="form.get('amount')?.hasError('min')">
+          Amount must be greater than 0
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Current Balance</mat-label>
+        <input matInput type="number" formControlName="currentBalance" required />
+        <mat-error *ngIf="form.get('currentBalance')?.hasError('required')">
+          Required field
+        </mat-error>
+        <mat-error *ngIf="form.get('currentBalance')?.hasError('min')">
+          Balance cannot be negative
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Applicant</mat-label>
+        <mat-select formControlName="applicantId" required>
+          <mat-option *ngFor="let applicant of applicants" [value]="applicant.id">
+            {{ applicant.fullName }} - {{ applicant.dni }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('applicantId')?.hasError('required')">
+          Required field
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="isActive">
+          <mat-option [value]="true">Active</mat-option>
+          <mat-option [value]="false">Inactive</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-stroked-button type="button" (click)="cancel()">
+          Cancel
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          (click)="save()"
+          [disabled]="form.invalid || isLoading">
+          {{ isLoading ? 'Saving...' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

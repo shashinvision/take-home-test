@@ -1,0 +1,14 @@
+<!-- home.component.html -->
+<div class="home-container">
+  <header class="home-header">
+    <h1>Loan Management System</h1>
+    <div class="user-info">
+      <span><b> Bienvenido:</b> {{ name }}</span>
+      <button (click)="logout()">Cerrar Sesión</button>
+    </div>
+  </header>
+
+  <div class="home-content">
+    <app-table></app-table>
+  </div>
+</div>
