@@ -5,6 +5,7 @@ using Fundo.Applications.WebApi.Models;
 using Fundo.Applications.WebApi.DTOs;
 using System;
 using System.Text.Json;
+using System.Runtime.ExceptionServices;
 
 
 namespace Fundo.Applications.WebApi.Controllers
@@ -34,7 +35,7 @@ namespace Fundo.Applications.WebApi.Controllers
                 if (paymentDto.Amount == null || paymentDto.Amount <= 0)
                     return BadRequest("Amount must be greater than 0");
 
-                if (paymentDto.IdLoan == null || paymentDto.IdLoan <= 0)
+                if (paymentDto.IdLoan <= 0)
                     return BadRequest("Valid id loan ID is required");
 
                 await _paymentManagementService.CreatePayment(paymentDto);
@@ -50,7 +51,7 @@ namespace Fundo.Applications.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(ex.Message);
             }
         }
 
