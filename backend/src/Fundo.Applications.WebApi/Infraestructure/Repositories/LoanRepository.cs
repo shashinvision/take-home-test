@@ -22,7 +22,10 @@ public class LoanRepository : IBaseRepository<Loan>
 
     public async Task<IEnumerable<Loan>> GetAll()
     {
-        return await _context.Loans.ToListAsync();
+        return await _context.Loans
+            .Include(l => l.IdApplicantNavigation)
+            .Include(l => l.Payments)
+            .ToListAsync();
     }
 
     public async Task Add(Loan loan)

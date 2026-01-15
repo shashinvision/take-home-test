@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Fundo.Applications.WebApi.Models
 {
@@ -10,6 +11,7 @@ namespace Fundo.Applications.WebApi.Models
         public int? IdLoan { get; set; }
         public DateTime? CreatedAt { get; set; }
 
+        [JsonIgnore]
         public virtual Loan IdLoanNavigation { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Fundo.Applications.WebApi.Models
 {
@@ -14,6 +15,7 @@ namespace Fundo.Applications.WebApi.Models
         public string FullName { get; set; }
         public string Dni { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Loan> Loans { get; set; }
     }
 }

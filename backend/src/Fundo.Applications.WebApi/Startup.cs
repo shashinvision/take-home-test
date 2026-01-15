@@ -4,7 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Fundo.Applications.WebApi.Models;
 using Fundo.Applications.WebApi.Data;
+using Fundo.Applications.WebApi.Infraestructure.Repositories;
+using Fundo.Applications.WebApi.Services;
 
 namespace Fundo.Applications.WebApi
 {
@@ -30,6 +33,12 @@ namespace Fundo.Applications.WebApi
                     options.JsonSerializerOptions.ReferenceHandler =
                         System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
                 });
+
+            //Repositories
+            services.AddScoped<IBaseRepository<Loan>, LoanRepository>();
+
+            // Services
+            services.AddScoped<LoanManagementService>();
 
             // CORS
             services.AddCors(options =>
