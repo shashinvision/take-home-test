@@ -7,6 +7,8 @@ Proyecto creado como evidencia de conocimiento en las tecnologías utilizadas en
 - Prestamos.
 - Pagos de prestamos
 
+## Video de la explicación en: https://youtu.be/F_Gw4Ox6z0E
+
 Desde el backend y usando la API Post login puedes crear mas usuarios si lo deseas, las instrucciones estan un poco mas adelante para ese caso usando Postman, por defecto tenemos un usuario administrador con correo `admin@admin.com` y contraseña `asdf1234.,` para tener accesos a las funcionalidades del sistema y poder usar su JWT (Bearer), posterior a esto ya puedes crear usuarios, prestamos y pagos.
 
 Desde el frontend puedes crear prestamos y pagos con clientes(applicants) existentes, se omitio a proposito un mantenedor por temas de optimizar tiempos, algo similar ocurre con los usuarios con la salvedad que aca si puedes crearlos directos desde postman teniendo un JWT valido y pasandolo como Bearer en el endpoint de registro. A su vez puedes ver los detalles de los prestamos y los pagos, puedes:
