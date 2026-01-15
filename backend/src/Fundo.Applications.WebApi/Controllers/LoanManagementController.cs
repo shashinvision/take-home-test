@@ -38,12 +38,10 @@ namespace Fundo.Applications.WebApi.Controllers
         {
             try
             {
-                // see json loanDto
                 Console.WriteLine(
                     JsonSerializer.Serialize(loanDto)
                 );
 
-                // Validaciones básicas
                 if (loanDto == null)
                     return BadRequest("Loan data is required");
 
