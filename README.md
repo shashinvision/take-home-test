@@ -1,83 +1,60 @@
-# **Take-Home Test: Backend-Focused Full-Stack Developer (.NET C# & Angular)**
+# **Take-Home Test: Backend-Focused Full-Stack Developer (.NET C#, Angular & Docker)**
 
-## **Objective**
+## Solución por Felipe Mancilla -> https://felipemancilla.net
 
-This take-home test evaluates your ability to develop and integrate a .NET Core (C#) backend with an Angular frontend, focusing on API design, database integration, and basic DevOps practices.
+## Resumen
+Proyecto creado como evidencia de conocimiento en las tecnologías utilizadas en el proyecto, para el sistema financiero, en este caso:
+- Prestamos.
+- Pagos de prestamos
 
-## **Instructions**
+Desde el backend y usando la API Post login puedes crear mas usuarios si lo deseas, las instrucciones estan un poco mas adelante para ese caso usando Postman, por defecto tenemos un usuario administrador con correo `admin@admin.com` y contraseña `asdf1234.,` para tener accesos a las funcionalidades del sistema y poder usar su JWT (Bearer), posterior a esto ya puedes crear usuarios, prestamos y pagos.
 
-1.  **Fork the provided repository** before starting the implementation.
-2.  Implement the requested features in your forked repository.
-3.  Once you have completed the implementation, **send the link** to your forked repository via email for review.
+Desde el frontend puedes crear prestamos y pagos con clientes(applicants) existentes, se omitio a proposito un mantenedor por temas de optimizar tiempos, algo similar ocurre con los usuarios con la salvedad que aca si puedes crearlos directos desde postman teniendo un JWT valido y pasandolo como Bearer en el endpoint de registro. A su vez puedes ver los detalles de los prestamos y los pagos, puedes:
 
-## **Task**
+- Ver Prestamos.
+- Crear los prestamos.
+- Crear los pagos.
 
-You will build a simple **Loan Management System** with a **.NET Core backend (C#)** exposing RESTful APIs and a **basic Angular frontend** consuming these APIs.
+Funciones destacadas: 
+- Login, protección de rutas, el sistema carece de roles para optimozar tiempos.
+- No puedes pagar mas de lo que debes.
+- Si pagas de forma parcial se va descontando la deuda.
+- Si pagas todo el saldo la deuda desaparece y se desactiva la deuda mas el boton de acción.
 
----
 
-## **Requirements**
+![docker](./assets/docker.jpg)
+![proyecto_completo](./assets/proyecto_completo.jpg)
 
-### **1. Backend (API) - .NET Core**
+El proyecto esta compuesto por:
+- Backend: .NET 6 API con Dockerfile para contenerizar la aplicación.
+- Frontend: Angular con Dockerfile para contenerizar la aplicación.
+- Base de datos: SqlServer con Dockerfile para contenerizar la base de datos.
+- Docker Compose para orquestar los contenedores.
 
-* Create a **RESTful API** in .NET Core to handle **loan applications**.
-* Implement the following endpoints:
-    * `POST /loans` → Create a new loan.
-    * `GET /loans/{id}` → Retrieve loan details.
-    * `GET /loans` → List all loans.
-    * `POST /loans/{id}/payment` → Deduct from `currentBalance`.
-* Loan example (feel free to improve it):
+## Requisitos
+- Docker
+- Docker Compose
 
-    ```json
-    {
-        "amount": 1500.00, // Amount requested
-        "currentBalance": 500.00, // Remaining balance
-        "applicantName": "Maria Silva", // User name
-        "status": "active" // Status can be active or paid
-    }
-    ```
+## Instalación
+1. Clonar el repositorio: `git clone https://github.com/felipemancilla/take-home-test.git`
+2. Acceder al directorio del proyecto: `cd take-home-test`
+3. Construir los contenedores: `docker-compose build`
+4. Iniciar los contenedores: `docker-compose up`
 
-* Use **Entity Framework Core** with **SQL Server**.
-* Create seed data to populate the loans (the frontend will consume this).
-* Write **unit/integration tests for the API** (xUnit or NUnit).
-* **Dockerize** the backend and create a **Docker Compose** file.
-* Create a README with setup instructions.
+## Uso
+1. Abrir el navegador y acceder a la aplicación: `http://localhost:4200`
+2. Iniciar sesión con las credenciales: `admin@admin.com` y `asdf1234.,`
 
-### **2. Frontend - Angular (Simplified UI)**  
+## Postaman
+- Dentro de esta carpeta puedes encontrar el archivo postman para probar las apis: postman/Challenge Loan.postman_collection.json
 
-Develop a **lightweight Angular app** to interact with the backend
+## composición:
 
-#### **Features:**  
-- A **table** to display a list of existing loans.  
-
-#### **Mockup:**  
-[View Mockup](https://kzmgtjqt0vx63yji8h9l.lite.vusercontent.net/)  
-(*The design doesn’t need to be an exact replica of the mockup—it serves as a reference. Aim to keep it as close as possible.*)  
-
----
-
-## **Bonus (Optional, Not Required)**
-
-* **Improve error handling and logging** with structured logs.
-* Implement **authentication**.
-* Create a **GitHub Actions** pipeline for building and testing the backend.
-
----
-
-## **Evaluation Criteria**
-
-✔ **Code quality** (clean architecture, modularization, best practices).
-
-✔ **Functionality** (the API and frontend should work as expected).
-
-✔ **Security considerations** (authentication, validation, secure API handling).
-
-✔ **Testing coverage** (unit tests for critical backend functions).
-
-✔ **Basic DevOps implementation** (Docker for backend).
-
----
-
-## **Additional Information**
-
-Candidates are encouraged to include a `README.md` file in their repository detailing their implementation approach, any challenges they faced, features they couldn't complete, and any improvements they would make given more time. Ideally, the implementation should be completed within **two days** of starting the test.
+- Frontend:
+![Frontend](./assets/frontend.jpg)
+- Backend:
+![Backend](./assets/backend.jpg)
+- Base de datos:
+![Base de datos](./assets/database.jpg)
+- Api:
+![Api](./assets/api.jpg)
