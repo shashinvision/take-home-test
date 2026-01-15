@@ -30,16 +30,12 @@ namespace Fundo.Applications.WebApi
         {
             // DbContext
             services.AddDbContext<FundoDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("SqlConnection"),
+                    sql => sql.EnableRetryOnFailure()
+                ));
 
             // Controllers
-            services.AddControllers()
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.ReferenceHandler =
-                        System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-                });
-
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -104,7 +100,7 @@ namespace Fundo.Applications.WebApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("AllowAngular");
             app.UseAuthentication();

@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using Fundo.Applications.WebApi.Infraestructure;
+using Fundo.Applications.WebApi.Data;
 
 namespace Fundo.Applications.WebApi
 {
@@ -21,11 +22,16 @@ namespace Fundo.Applications.WebApi
                     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
                     var logger = loggerFactory.CreateLogger("Fundo.Applications.WebApi.Program");
 
+
                     try
                     {
-                        logger.LogInformation("Starting database seed operation");
+                        logger.LogInformation("Ensuring database is created");
+
+                        var db = services.GetRequiredService<FundoDbContext>();
+                        db.Database.EnsureCreated();
+
+                        logger.LogInformation("Running database seed");
                         SeedData.Initialize(services);
-                        logger.LogInformation("Database seed operation completed successfully");
                     }
                     catch (Exception ex)
                     {
