@@ -51,6 +51,11 @@ public class PaymentManagementService : IPaymentManagementService
 
         // update current balance of loan
         loan.CurrentBalance -= paymentDto.Amount;
+
+        if (loan.CurrentBalance == 0)
+        {
+            loan.IsActive = 0;
+        }
         await _loanRepository.Update(loan);
     }
 
