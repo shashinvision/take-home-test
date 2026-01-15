@@ -107,6 +107,7 @@ namespace Fundo.Applications.WebApi
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("AllowAngular");
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
