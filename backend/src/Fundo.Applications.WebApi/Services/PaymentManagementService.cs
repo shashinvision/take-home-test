@@ -54,12 +54,12 @@ public class PaymentManagementService : IPaymentManagementService
         await _loanRepository.Update(loan);
     }
 
-    public async Task UpdateLoan(Payment payment)
+    public async Task UpdatePayment(Payment payment)
     {
         await _paymentRepository.Update(payment);
     }
 
-    public async Task DeleteLoan(int id)
+    public async Task DeletePayment(int id)
     {
         await _paymentRepository.Delete(id);
     }

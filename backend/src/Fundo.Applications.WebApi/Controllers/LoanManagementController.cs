@@ -12,9 +12,9 @@ namespace Fundo.Applications.WebApi.Controllers
     [Route("/loans")]
     public class LoanManagementController : Controller
     {
-        private readonly LoanManagementService _loanManagementService;
+        private readonly ILoanManagementService _loanManagementService;
 
-        public LoanManagementController(LoanManagementService loanManagementService)
+        public LoanManagementController(ILoanManagementService loanManagementService)
         {
             _loanManagementService = loanManagementService;
         }

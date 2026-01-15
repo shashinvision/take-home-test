@@ -55,7 +55,7 @@ namespace Fundo.Applications.WebApi
             services.AddScoped<IAuthRepository<User>, UserRepository>();
 
             // Services
-            services.AddScoped<LoanManagementService>();
+            services.AddScoped<ILoanManagementService, LoanManagementService>();
             services.AddScoped<IPaymentManagementService, PaymentManagementService>();
 
             var jwtSettings = Configuration.GetSection("JwtSettings");
