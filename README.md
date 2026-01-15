@@ -54,6 +54,8 @@ El proyecto esta compuesto por:
 ![Frontend](./assets/frontend.jpg)
 - Backend:
 ![Backend](./assets/backend.jpg)
+- Nunit para tests unitarios, en este caso por temas de tiempo solo se cubrió la capa de controladores
+![Nuit](./assets/nunit.jpg)
 - Base de datos:
 ![Base de datos](./assets/database.jpg)
 - Api:
