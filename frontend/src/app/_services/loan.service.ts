@@ -20,6 +20,6 @@ export class LoanService {
     return this.http.get<Loan>(`${this.apiUrl}/loans/${id}`);
   }
   createLoan(payload: loanPayload) {
-    return this.http.post<Loan>(`${this.apiUrl}/loans`, payload);
+    return this.http.post(`${this.apiUrl}/loans`, payload);
   }
 }
