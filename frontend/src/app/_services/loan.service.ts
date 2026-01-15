@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 import { Environment } from "../_models/environment.model";
 import { Loan } from "../_models/loan";
+import { loanPayload } from "../_models/loanPayload";
 
 @Injectable({
   providedIn: "root",
@@ -14,5 +15,11 @@ export class LoanService {
 
   getLoans() {
     return this.http.get<Loan[]>(`${this.apiUrl}/loans`);
+  }
+  getLoanById(id: number) {
+    return this.http.get<Loan>(`${this.apiUrl}/loans/${id}`);
+  }
+  createLoan(payload: loanPayload) {
+    return this.http.post<Loan>(`${this.apiUrl}/loans`, payload);
   }
 }
