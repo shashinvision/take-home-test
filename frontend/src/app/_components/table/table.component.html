@@ -1,6 +1,9 @@
 <main class="loans">
   <section class="loans--container">
     <h1>Loan Management</h1>
+    <button mat-raised-button color="primary" (click)="openCreateLoan()">
+      + Create Loan
+    </button>
     <table mat-table [dataSource]="loans" class="mat-elevation-z8">
       <ng-container matColumnDef="loanAmount">
         <th mat-header-cell *matHeaderCellDef>Loan Amount</th>

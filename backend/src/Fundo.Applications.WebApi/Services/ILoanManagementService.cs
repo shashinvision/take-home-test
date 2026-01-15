@@ -12,4 +12,5 @@ public interface ILoanManagementService
     Task CreateLoan(LoanDto loanDto);
     Task UpdateLoan(Loan loan);
     Task DeleteLoan(int id);
+    Task<IEnumerable<Applicant>> GetAllApplicantsLoans();
 }

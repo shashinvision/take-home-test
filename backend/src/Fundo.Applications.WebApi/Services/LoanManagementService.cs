@@ -10,15 +10,24 @@ namespace Fundo.Applications.WebApi.Services;
 public class LoanManagementService : ILoanManagementService
 {
     private readonly IBaseRepository<Loan> _loanRepository;
+    private readonly IBaseRepository<Applicant> _applicantRepository;
 
-    public LoanManagementService(IBaseRepository<Loan> loanRepository)
+    public LoanManagementService(IBaseRepository<Loan> loanRepository, IBaseRepository<Applicant> applicantRepository)
     {
         _loanRepository = loanRepository;
+        _applicantRepository = applicantRepository;
     }
 
     public async Task<IEnumerable<Loan>> GetAllLoans()
     {
         return await _loanRepository.GetAll();
+    }
+
+    public async Task<IEnumerable<Applicant>> GetAllApplicantsLoans()
+    {
+        var applicants = await _applicantRepository.GetAll();
+
+        return applicants;
     }
 
     public async Task<Loan> GetLoanById(int id)
@@ -53,4 +62,5 @@ public class LoanManagementService : ILoanManagementService
     {
         await _loanRepository.Delete(id);
     }
+
 }

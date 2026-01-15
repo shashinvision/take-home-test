@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Authorization;
 using Fundo.Applications.WebApi.DTOs;
 using System;
 using System.Text.Json;
-
+using System.Linq;
 
 namespace Fundo.Applications.WebApi.Controllers
 {
 
-    [Authorize]
+    // [Authorize]
     [Route("/loans")]
     public class LoanManagementController : Controller
     {
@@ -26,6 +26,17 @@ namespace Fundo.Applications.WebApi.Controllers
         {
             var loans = await _loanManagementService.GetAllLoans();
             return Ok(loans);
+        }
+
+        [HttpGet("/applicants")]
+        public async Task<ActionResult> GetAllApplicantsLoans()
+        {
+            var applicants = await _loanManagementService.GetAllApplicantsLoans();
+            return Ok(new
+            {
+                count = applicants.Count(),
+                data = applicants
+            });
         }
 
         [HttpGet("{id}")]
