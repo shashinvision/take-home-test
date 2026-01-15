@@ -2,17 +2,17 @@ import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MatTableModule } from "@angular/material/table";
 import { MatButtonModule } from "@angular/material/button";
-import { Loan } from "./_models/loan";
-import { LoanService } from "./_services/loan.service";
+import { Loan } from "../../_models/loan";
+import { LoanService } from "../../_services/loan.service";
 
 @Component({
-  selector: "app-root",
+  selector: "app-table",
   standalone: true,
   imports: [CommonModule, MatTableModule, MatButtonModule],
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  templateUrl: "./table.component.html",
+  styleUrls: ["./table.component.scss"],
 })
-export class AppComponent implements OnInit {
+export class TableComponent implements OnInit {
   loans: Loan[] = [];
 
   displayedColumns: string[] = [
