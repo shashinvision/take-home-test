@@ -7,7 +7,6 @@ namespace Fundo.Applications.WebApi.DTOs;
 
 public class LoanDto
 {
-    [JsonPropertyName("amount")]
     public decimal? Amount { get; set; }
     public decimal? CurrentBalance { get; set; }
     public int? IsActive { get; set; }

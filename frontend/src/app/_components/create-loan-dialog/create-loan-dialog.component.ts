@@ -13,6 +13,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import { LoanService } from "../../_services/loan.service";
 import { Applicants } from "../../_models/applicants";
+import { loanPayload } from "../../_models/loanPayload";
 
 @Component({
   selector: "app-create-loan-dialog",
@@ -65,7 +66,16 @@ export class CreateLoanDialogComponent implements OnInit {
     if (this.form.invalid) return;
 
     this.isLoading = true;
-    this.loanService.createLoan(this.form.value).subscribe({
+
+    // Transformar el payload para que coincida con el backend
+    const payload: loanPayload = {
+      amount: this.form.value.amount,
+      currentBalance: this.form.value.currentBalance,
+      isActive: this.form.value.isActive ? 1 : 0,
+      idApplicant: this.form.value.applicantId,
+    };
+
+    this.loanService.createLoan(payload).subscribe({
       next: () => {
         this.isLoading = false;
         this.dialogRef.close(true);
