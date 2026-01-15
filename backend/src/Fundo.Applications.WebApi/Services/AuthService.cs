@@ -81,7 +81,7 @@ public class AuthService : IAuthService
         };
     }
 
-    public async Task<User?> GetUserByEmailAsync(string email)
+    public async Task<User> GetUserByEmailAsync(string email)
     {
         return await _authUserRepository.GetByEmail(email: email);
 
