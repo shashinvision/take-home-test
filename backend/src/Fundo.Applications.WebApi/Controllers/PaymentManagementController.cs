@@ -13,9 +13,9 @@ namespace Fundo.Applications.WebApi.Controllers
     [Route("/payment")]
     public class PaymentManagementController : Controller
     {
-        private readonly PaymentManagementService _paymentManagementService;
+        private readonly IPaymentManagementService _paymentManagementService;
 
-        public PaymentManagementController(PaymentManagementService paymentManagementService)
+        public PaymentManagementController(IPaymentManagementService paymentManagementService)
         {
             _paymentManagementService = paymentManagementService;
         }

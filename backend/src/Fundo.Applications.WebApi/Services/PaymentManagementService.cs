@@ -7,7 +7,7 @@ using System;
 
 namespace Fundo.Applications.WebApi.Services;
 
-public class PaymentManagementService
+public class PaymentManagementService : IPaymentManagementService
 {
     private readonly IBaseRepository<Payment> _paymentRepository;
     private readonly IBaseRepository<Loan> _loanRepository;
