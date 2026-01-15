@@ -51,4 +51,9 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem("token");
   }
+
+  getClaim(key: string): string | null {
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+    return user[key] || null;
+  }
 }
