@@ -1,32 +1,119 @@
+// table.component.scss
 .loans {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-
-  &--container {
-    width: 60%;
-  }
+  width: 100%;
 }
 
-.mdc-data-table {
-  &__table {
-    margin-top: 20px;
-    border: 1px solid #dee5ed;
-    border-radius: 4px;
+.loans--container {
+  h1 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 600;
   }
 
-  &__header-cell {
-    color: #7b8187;
-  }
-}
+  // Estilos para la tabla de Angular Material
+  table {
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
 
-@media (max-width: 992px) {
-  .loans {
-    &--container {
-      width: 100%;
+    // Header
+    th {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 1rem 1.5rem !important;
+      border-bottom: none !important;
     }
+
+    // Celdas
+    td {
+      padding: 1rem 1.5rem !important;
+      font-size: 0.95rem;
+      color: #2c3e50;
+      border-bottom: 1px solid #ecf0f1 !important;
+    }
+
+    // Filas
+    tr {
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+
+      &:last-child td {
+        border-bottom: none !important;
+      }
+    }
+
+    // Status badge
+    td:nth-child(4) {
+      font-weight: 500;
+
+      // Puedes agregar badges condicionales si querés
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  // Si usás mat-elevation-z8, esto mejora la sombra
+  .mat-elevation-z8 {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
+}
+
+// Estado activo/inactivo con colores
+.loans--container table td {
+  &:has-text("Active") {
+    color: #27ae60;
+    font-weight: 600;
+  }
+
+  &:has-text("Inactive") {
+    color: #e74c3c;
+    font-weight: 600;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .loans--container {
+    h1 {
+      font-size: 1.25rem;
+    }
+
+    table {
+      th,
+      td {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+// Override de estilos de Material si es necesario
+::ng-deep {
+  .mat-mdc-table {
+    background: transparent;
+  }
+
+  .mat-mdc-header-row {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .mat-mdc-header-cell {
+    color: white !important;
+    font-weight: 600 !important;
+  }
+
+  .mat-mdc-row:hover {
+    background-color: #f8f9fa;
   }
 }
