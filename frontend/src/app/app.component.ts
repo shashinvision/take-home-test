@@ -1,40 +1,31 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
+import { Component, OnInit } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { MatTableModule } from "@angular/material/table";
+import { MatButtonModule } from "@angular/material/button";
+import { Loan } from "./_models/loan";
+import { LoanService } from "./_services/loan.service";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
   imports: [CommonModule, MatTableModule, MatButtonModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  loans: Loan[] = [];
+
   displayedColumns: string[] = [
-    'loanAmount',
-    'currentBalance',
-    'applicant',
-    'status',
+    "loanAmount",
+    "currentBalance",
+    "applicant",
+    "status",
   ];
-  loans = [
-    {
-      loanAmount: 25000.00,
-      currentBalance: 18750.00,
-      applicant: 'John Doe',
-      status: 'active',
-    },
-    {
-      loanAmount: 15000.00,
-      currentBalance: 0,
-      applicant: 'Jane Smith',
-      status: 'paid',
-    },
-    {
-      loanAmount: 50000.00,
-      currentBalance: 32500.00,
-      applicant: 'Robert Johnson',
-      status: 'active',
-    },
-  ];
+  constructor(private loanservice: LoanService) {}
+
+  ngOnInit() {
+    this.loanservice.getLoans().subscribe((loans) => {
+      this.loans = loans;
+    });
+  }
 }
