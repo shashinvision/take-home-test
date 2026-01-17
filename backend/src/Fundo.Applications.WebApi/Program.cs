@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using Fundo.Applications.WebApi.Infraestructure;
 using Fundo.Applications.WebApi.Data;
+using NLog;
+using NLog.Web;
 
 namespace Fundo.Applications.WebApi
 {
@@ -12,30 +14,31 @@ namespace Fundo.Applications.WebApi
     {
         public static void Main(string[] args)
         {
+            var logger = NLogBuilder.ConfigureNLog("appsettings.json").GetCurrentClassLogger();
+
             try
             {
+                logger.Info("Iniciando aplicación Fundo");
+
                 var host = CreateWebHostBuilder(args).Build();
 
                 using (var scope = host.Services.CreateScope())
                 {
                     var services = scope.ServiceProvider;
                     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-                    var logger = loggerFactory.CreateLogger("Fundo.Applications.WebApi.Program");
-
+                    var appLogger = loggerFactory.CreateLogger("Fundo.Applications.WebApi.Program");
 
                     try
                     {
-                        logger.LogInformation("Ensuring database is created");
-
+                        appLogger.LogInformation("Ensuring database is created");
                         var db = services.GetRequiredService<FundoDbContext>();
                         db.Database.EnsureCreated();
-
-                        logger.LogInformation("Running database seed");
+                        appLogger.LogInformation("Running database seed");
                         SeedData.Initialize(services);
                     }
                     catch (Exception ex)
                     {
-                        logger.LogError(ex, "Error occurred while seeding database");
+                        appLogger.LogError(ex, "Error occurred while seeding database");
                     }
                 }
 
@@ -43,19 +46,26 @@ namespace Fundo.Applications.WebApi
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Unhandled WebApi exception: {ex.Message}");
+                logger.Error(ex, "Stopped program because of exception");
                 throw;
             }
             finally
             {
-                Console.WriteLine("Application shutting down.");
+                logger.Info("Application shutting down");
+                LogManager.Shutdown();
             }
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
             return WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+                })
+                .UseNLog();
         }
     }
 }
