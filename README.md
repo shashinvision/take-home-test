@@ -40,8 +40,8 @@ El proyecto esta compuesto por:
 ## Instalación
 1. Clonar el repositorio: `git clone https://github.com/felipemancilla/take-home-test.git`
 2. Acceder al directorio del proyecto: `cd take-home-test`
-3. Construir los contenedores: `docker-compose build`
-4. Iniciar los contenedores: `docker-compose up`
+3. Construir los contenedores: `docker compose build`
+4. Iniciar los contenedores: `docker compose -d up --force-recreate`
 
 ## Uso
 1. Abrir el navegador y acceder a la aplicación: `http://localhost:4200`
